@@ -8,17 +8,21 @@ import { RawgService } from './services/rawg.service';
 })
 export class AppComponent {
 
-  title = 'my-games-app';
-  game: any;
+  title: string;
+  backgroundImage: string;
 
   constructor( private rawgService: RawgService ) {
-    this.showResults();
+    this.backgroundImage = '../assets/back.jpg';
+    this.loadBackgroundImage();
   }
 
-  showResults(): void {
-    this.rawgService.getMostRatingGames()
+  loadBackgroundImage(): void {
+    this.rawgService.getRadomImage()
       .subscribe(
-        x => console.log(x),
+        (backgroundImage: string) => {
+          this.backgroundImage = backgroundImage;
+          console.log(this.backgroundImage);
+        },
         err => console.log(err),
         () => console.log('termino la peticion')
       );

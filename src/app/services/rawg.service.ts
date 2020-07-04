@@ -1,7 +1,7 @@
 import { Injectable, Query } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -21,7 +21,21 @@ export class RawgService {
     return this.makePetition(uri);
   }
 
-  makePetition(uri: string): Observable<any> {
+  getRadomImage() {
+    const uri = 'games?dates=2019-01-01,2020-12-31&ordering=-added';
+    return this.makePetition(uri)
+            .pipe(
+              map(
+                x => {
+                  let games: Array<any> = x.results;
+                  games = games.map( game => game.background_image);
+                  return games[Math.floor(Math.random() * games.length)];
+                }
+              )
+            );
+  }
+
+  private makePetition(uri: string): Observable<any> {
     return this.http.get(`${environment.API_URL}/${uri}`);
   }
 
