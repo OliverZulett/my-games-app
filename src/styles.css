@@ -3,3 +3,11 @@
   font-family: led-display;
   src: url(assets/fonts/The-Led-Display-St.ttf) format("opentype");
 }
+
+h1, h2, h3, h4 {
+  font-family: 'Bebas Neue', cursive;
+}
+
+p, a, span {
+  font-family: 'Lato', sans-serif;
+}

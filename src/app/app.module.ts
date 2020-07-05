@@ -10,6 +10,7 @@ import { LatestComponent } from './pages/latest/latest.component';
 import { GameComponent } from './pages/game/game.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { AboutComponent } from './pages/about/about.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AboutComponent } from './pages/about/about.component';
     LatestComponent,
     GameComponent,
     NavbarComponent,
-    AboutComponent
+    AboutComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
