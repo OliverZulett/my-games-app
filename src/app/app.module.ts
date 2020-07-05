@@ -8,13 +8,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { PopularsComponent } from './pages/populars/populars.component';
 import { LatestComponent } from './pages/latest/latest.component';
 import { GameComponent } from './pages/game/game.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PopularsComponent,
     LatestComponent,
-    GameComponent
+    GameComponent,
+    NavbarComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

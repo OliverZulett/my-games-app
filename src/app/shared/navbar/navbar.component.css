@@ -1,0 +1,20 @@
+.navbar-brand {
+    font-family: led-display;
+    font-size: 2.8em;
+    color: #13F4EF;
+}
+
+.nav-item.active>.nav-link {
+    color: #13F4EF;
+}
+
+.nav-link {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2em;
+}
+
+.navbar-toggler {
+    border: none;
+    font-size: 2em;
+    color: #13F4EF;
+}
