@@ -5,10 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { PopularsComponent } from './pages/populars/populars.component';
+import { LatestComponent } from './pages/latest/latest.component';
+import { GameComponent } from './pages/game/game.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PopularsComponent,
+    LatestComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
