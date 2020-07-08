@@ -1,12 +1,6 @@
 import { Component, HostBinding, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { fromEvent } from 'rxjs';
 import { throttleTime, map, pairwise, distinctUntilChanged, share, filter } from 'rxjs/operators';
 import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
@@ -53,9 +47,10 @@ export class NavbarComponent implements AfterViewInit {
     return this.isVisible ? VisibilityState.Visible : VisibilityState.Hidden;
   }
 
-  constructor(private sanitizer: DomSanitizer) {
-
-  }
+  constructor(
+    private sanitizer: DomSanitizer,
+    private router: Router
+  ) { }
 
   ngAfterViewInit() {
     const scroll$ = fromEvent(window, 'scroll').pipe(

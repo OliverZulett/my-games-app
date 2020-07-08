@@ -1,19 +1,23 @@
-<section
-  class="d-flex flex-column align-items-center justify-content-center pt-4 pb-3"
+<main
+  [ngStyle]="{'background-image':'linear-gradient(180deg, rgba(0,0,0,0.8939950980392157) 5%, rgba(255,255,255,0) 50%, rgba(0,0,0,1) 98%),url(' +backgroundImage +')'}"
 >
-  <h1 class="text-center">my games app</h1>
-  <p class="text-center">
-    Una App en la que puedes encontrar tus videojuegos favoritos.
-  </p>
-  <form class="form-inline mt-4 justify-content-center ">
-    <input
-      class="form-control mr-sm-2"
-      type="text"
-      placeholder="Busca un videojuego"
-      aria-label="Search"
-    />
-    <button class="btn mt-4 mt-sm-0" type="submit">
-      Search
-    </button>
-  </form>
-</section>
+  <section
+    class="d-flex flex-column align-items-center justify-content-center pt-4 pb-3"
+  >
+    <h1 class="text-center">my games app</h1>
+    <p class="text-center">
+      Una App en la que puedes encontrar tus videojuegos favoritos.
+    </p>
+    <form class="form-inline mt-4 justify-content-center">
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        placeholder="Busca un videojuego"
+        aria-label="Search"
+      />
+      <button class="btn mt-4 mt-sm-0" type="submit">
+        Search
+      </button>
+    </form>
+  </section>
+</main>
