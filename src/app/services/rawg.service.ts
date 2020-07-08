@@ -22,7 +22,7 @@ export class RawgService {
   }
 
   getRadomImage() {
-    const uri = 'games?dates=2019-01-01,2020-12-31&ordering=-added';
+    const uri = 'games?dates=2018-01-01,2019-12-31&ordering=-added';
     return this.makePetition(uri)
             .pipe(
               map(

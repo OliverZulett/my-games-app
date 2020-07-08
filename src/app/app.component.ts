@@ -1,40 +1,41 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RawgService } from './services/rawg.service';
-import { Subscription } from 'rxjs';
+import { Component, AfterViewInit } from '@angular/core';
+import { throttleTime, map, pairwise, distinctUntilChanged, share, filter } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements AfterViewInit {
 
-  title: string;
-  backgroundImage: string;
-  backgrounfImageSubscribe: Subscription;
+  public showStickyHeader = false;
 
-  constructor( private rawgService: RawgService ) {
-    this.backgroundImage = '../assets/back.jpg';
+  ngAfterViewInit() {
+    enum Direction {
+      Up = 'Up',
+      Down = 'Down'
+    }
+
+    const scroll$ = fromEvent(window, 'scroll').pipe(
+      throttleTime(10),
+      map(() => window.pageYOffset),
+      pairwise(),
+      map(([y1, y2]): Direction => (y2 < y1 ? Direction.Up : Direction.Down)),
+      distinctUntilChanged(),
+      share()
+    );
+
+    const scrollUp$ = scroll$.pipe(
+      filter(direction => direction === Direction.Up)
+    );
+
+    const scrollDown = scroll$.pipe(
+      filter(direction => direction === Direction.Down)
+    );
+
+    scrollUp$.subscribe(() => this.showStickyHeader = false);
+    scrollDown.subscribe(() => this.showStickyHeader = true);
+
   }
-
-  ngOnInit(): void {
-    this.loadBackgroundImage();
-  }
-
-  ngOnDestroy(): void {
-    this.backgrounfImageSubscribe.unsubscribe();
-  }
-
-  private loadBackgroundImage(): void {
-    this.backgrounfImageSubscribe = this.rawgService.getRadomImage()
-      .subscribe(
-        (backgroundImage: string) => {
-          this.backgroundImage = backgroundImage;
-          console.log(this.backgroundImage);
-        },
-        err => console.log(err),
-        () => console.log('termino la peticion')
-      );
-  }
-
 }
