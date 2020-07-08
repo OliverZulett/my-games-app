@@ -1,0 +1,52 @@
+
+
+section {
+  min-height: 85vh;
+}
+
+h1 {
+  font-family: led-display;
+  text-transform: uppercase;
+  font-size: 3rem;
+  color: #13f4ef;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  line-height: 1;
+  color: white;
+}
+
+p {
+  font-size: 1.5em;
+  color: white;
+  font-weight: 400;
+}
+
+input {
+  font-size: 1.3em;
+  background: transparent;
+  border: 4px solid #13f4ef;
+  border-radius: 0px;
+  color: #13f4ef;
+}
+
+.form-control:focus {
+  font-size: 1.3em;
+  color: #13f4ef;
+  background-color: #fff0;
+  border-color: #13f4ef;
+  outline: 0;
+  box-shadow: none;
+}
+
+.btn {
+  background-color: #13f4ef;
+  color: white;
+  font-size: 1.4em;
+  border-radius: 0px;
+  font-family: 'Bebas Neue', cursive;
+}
