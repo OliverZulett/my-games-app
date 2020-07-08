@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
+import { Component, HostBinding, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   trigger,
@@ -7,52 +7,76 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { fromEvent } from 'rxjs';
+import { throttleTime, map, pairwise, distinctUntilChanged, share, filter } from 'rxjs/operators';
+import { SafeStyle, DomSanitizer } from '@angular/platform-browser';
+
+enum VisibilityState {
+  Visible = 'visible',
+  Hidden = 'hidden'
+}
+
+enum Direction {
+  Up = 'Up',
+  Down = 'Down'
+}
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
   animations: [
-    trigger('openClose', [
-      state('open', style({
-        // height: '200px',
-        opacity: 1,
-        backgroundColor: 'yellow'
-      })),
-      state('closed', style({
-        // height: '100px',
-        opacity: 0.5,
-        backgroundColor: 'green'
-      })),
-      transition('open => closed', [
-        animate('1s')
-      ]),
-      transition('closed => open', [
-        animate('0.5s')
-      ]),
-    ]),
-  ],
+    trigger('toggle', [
+      state(
+        VisibilityState.Hidden,
+        style({ opacity: 0, transform: 'translateY(-100%)' })
+      ),
+      state(
+        VisibilityState.Visible,
+        style({ opacity: 1, transform: 'translateY(0)' })
+      ),
+      transition('* => *', animate('200ms ease-in'))
+    ])
+  ]
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements AfterViewInit {
 
-  @HostBinding('attr.class') cssClass = 'custom-navbar';
+  private isVisible = false;
 
-  isOpen = true;
-
-  toggle() {
-    this.isOpen = !this.isOpen;
-    console.log(this.isOpen);
+  @HostBinding('style')
+  get myStyle(): SafeStyle {
+    return this.sanitizer.bypassSecurityTrustStyle('position: fixed; top: 0; width: 100%; backgroundColor: black');
   }
 
-  constructor( private router: Router ) {
+  @HostBinding('@toggle')
+  get toggle(): VisibilityState {
+    return this.isVisible ? VisibilityState.Visible : VisibilityState.Hidden;
   }
 
-  ngOnDestroy(): void {
-    this.toggle();
+  constructor(private sanitizer: DomSanitizer) {
+
   }
 
-  ngOnInit(): void {
-    this.toggle();
+  ngAfterViewInit() {
+    const scroll$ = fromEvent(window, 'scroll').pipe(
+      throttleTime(10),
+      map(() => window.pageYOffset),
+      pairwise(),
+      map(([y1, y2]): Direction => (y2 < y1 ? Direction.Up : Direction.Down)),
+      distinctUntilChanged(),
+      share()
+    );
+
+    const goingUp$ = scroll$.pipe(
+      filter(direction => direction === Direction.Up)
+    );
+
+    const goingDown$ = scroll$.pipe(
+      filter(direction => direction === Direction.Down)
+    );
+
+    goingUp$.subscribe(() => (this.isVisible = false));
+    goingDown$.subscribe(() => (this.isVisible = true));
   }
 
 }
