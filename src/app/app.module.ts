@@ -14,6 +14,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { SearchComponent } from './components/search/search.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GameCardComponent } from './components/game-card/game-card.component';
+import { StickyNavbarComponent } from './shared/sticky-navbar/sticky-navbar.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavbarComponent,
     AboutComponent,
     FooterComponent,
-    SearchComponent
+    SearchComponent,
+    GameCardComponent,
+    StickyNavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,68 @@
+section {
+    background-color: black;
+}
+
+h1 {
+    color: #13f4ef;
+    font-size: 3em;
+}
+
+p {
+    color: white;
+    font-size: 1.2em;
+}
+
+/* // Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .content {
+        margin: 2% 5% 2% 5%;
+        padding: 1%;
+    }
+    app-game-card {
+        width: 100%;
+    }
+}
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .content {
+        margin: 2% 6% 2% 6%;
+        padding: 1%;
+    }
+    app-game-card {
+        width: 50%;
+    }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .content {
+        margin: 2% 8% 2% 8%;
+        padding: 1%;
+    }
+    app-game-card {
+        width: 50%;
+    }
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .content {
+        margin: 2% 10% 2% 10%;
+        padding: 1%;
+    }
+    app-game-card {
+        width: 33%;
+    }
+}
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .content {
+        margin: 2% 12% 2% 12%;
+        padding: 1%;
+    }
+    app-game-card {
+        width: 25%;
+    }
+}
